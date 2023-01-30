@@ -1,0 +1,21 @@
+{
+  "1": {
+    "incident_id": 1,
+    "description": "",
+    "location": "",
+    "source": {
+      "original_path": "",
+      "prediction_path": ""
+    }
+  },
+
+  "2": {
+    "incident_id": 1,
+    "description": "",
+    "location": "",
+    "source": {
+      "original_path": "",
+      "prediction_path": ""
+    }
+  }
+}
