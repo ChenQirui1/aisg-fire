@@ -1,9 +1,12 @@
 nodes:
-  - input.visual:
-      source: squid.jpg
-  - model.yolo:
-      detect: ["person", "cell phone", "fork"]
-  - draw.bbox:
-      show_labels: True
-  - output.media_writer:
-      output_dir: data
+- input.visual:
+    source: C:\Users\potat\Documents\Computing\aisg\object_detect\aisg-fire\flask-server\static\uploads\MEOW.jpg
+- model.yolo:
+    detect:
+    - person
+    - cell phone
+    - fork
+- draw.bbox:
+    show_labels: true
+- custom_nodes.output.media_writer_h264:
+    output_dir: ../flask-server/static
