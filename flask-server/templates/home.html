@@ -1,27 +1,40 @@
 {% extends "base.html" %} {% block title %}Home Page{% endblock %} {% block
 content %}
 <h1>Active Incidents</h1>
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">Component</p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-      iaculis mauris.
-      <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-      <br />
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    </div>
-  </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">Upload Video</a>
-    <a href="#" class="card-footer-item">Upload Image</a>
-  </footer>
-</div>
+
 {% for incident in incidents %}
 <div class="card">
   <header class="card-header">
+    <p class="card-header-title">{{ incident.name }}</p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      {{ incident.description }}
+      <!-- <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> -->
+      <br />
+      <p>Location: {{incident.location}}</p>
+
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a
+      href="{{ url_for('capture',incident_id=incident.id, media='video') }}"
+      class="card-footer-item"
+      >Upload Video</a
+    >
+    <a
+      href="{{ url_for('capture',incident_id=incident.id, media='image') }}"
+      class="card-footer-item"
+      >Upload Image</a
+    >
+  </footer>
+</div>
+{% endfor %}
+
+<!-- card template -->
+<!-- <div class="card">
+  <header class="card-header">
     <p class="card-header-title">Component</p>
   </header>
   <div class="card-content">
@@ -34,8 +47,12 @@ content %}
     </div>
   </div>
   <footer class="card-footer">
-    <a href="#" class="card-footer-item">Upload Video</a>
-    <a href="#" class="card-footer-item">Upload Image</a>
+    <a href="{{ url_for('capture',media='video') }}" class="card-footer-item"
+      >Upload Video</a
+    >
+    <a href="{{ url_for('capture',media='image') }}" class="card-footer-item"
+      >Upload Image</a
+    >
   </footer>
-</div>
-{% endfor %} {% endblock %}
+</div> -->
+{% endblock %}

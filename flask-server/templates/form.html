@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Home Page{% endblock %} {% block
+content %}
+<form
+  class=""
+  action="{{ url_for('upload') }}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <div class="container is-fluid">
+    <div class="file is-boxed is-centered">
+      <label class="file-label">
+        {% if 'image' in media_type %}
+        <input
+          type="file"
+          name="file"
+          accept="img/*"
+          capture="environment"
+          hidden
+        />
+        <input type="hidden" name="media_type" value="image" />
+        {% endif %} {% if 'video' in media_type %}
+        <input
+          type="file"
+          name="file"
+          accept="video/*"
+          capture="environment"
+          hidden
+        />
+        <input type="hidden" name="media_type" value="video" />
+        {% endif %}
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label"> Choose a file… </span>
+        </span>
+      </label>
+    </div>
+    <div class="field">
+      <label class="label">Location</label>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="location"
+          placeholder="General location of the image taken"
+        />
+      </div>
+    </div>
+    <input
+      type="hidden"
+      id="incident_id"
+      name="incident_id"
+      value="{{incident_id}}"
+    />
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

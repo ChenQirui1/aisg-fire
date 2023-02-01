@@ -1,0 +1,16 @@
+{
+  "incidents": [
+    {
+      "id": 1,
+      "name": "asdawd",
+      "description": "dadasdseafasfddddszdgdsfhdsjha",
+      "location": "Singapore"
+    },
+    {
+      "id": 2,
+      "name": "asdsdfd",
+      "description": "dadasdseafasfddddszdgdsfhdsjha",
+      "location": "234"
+    }
+  ]
+}
