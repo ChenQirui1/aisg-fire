@@ -12,20 +12,25 @@ def read_json(path):
     with open(path) as file_in:
         return json.load(file_in)
     
-def modify_yaml(media_path):
+def modify_yaml(media_path,media_type):
     #media_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     
     
-    
+    if media_type == 'image':
     #hardcode path
-    path = os.path.abspath("../peeking-duck/pipeline_config.yml")
+        path = os.path.abspath("../peeking-duck/pipeline_config_image.yml")
+    elif media_type == 'video':
+    #hardcode path
+        path = os.path.abspath("../peeking-duck/pipeline_config_video.yml")
+    
     with open(path) as f:
         pipeline = yaml.safe_load(f)
         node = pipeline['nodes']
         visual = node[0]['input.visual']
         visual['source'] = media_path
-        
-    with open(path, 'w') as f:
+    
+    config_path = os.path.abspath("../peeking-duck/pipeline_config.yml")
+    with open(config_path, 'w') as f:
         yaml.dump(pipeline, f)
         
     

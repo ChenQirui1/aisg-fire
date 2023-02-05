@@ -1,5 +1,18 @@
-{% extends "base.html" %} {% block title %}Home Page{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Success{% endblock %} {% block
 content %}
-<h1>Upload Successful</h1>
+<section class="section">
+  <h1 class="title">Upload Successful</h1>
+  <h2 class="subtitle">Return to view active incidents?</h2>
+</section>
+
+<section class="section">
+  <div class="control">
+    <a href="{{url_for('hello')}}">
+      <button type="button" class="button is-link is-light is-fullwidth">
+        Return
+      </button>
+    </a>
+  </div>
+</section>
 
 {% endblock %}

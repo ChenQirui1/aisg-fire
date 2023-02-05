@@ -1,49 +1,78 @@
-{% extends "base.html" %} {% block title %}Home Page{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Upload Media{% endblock %} {% block
 content %}
+<script lang="js">
+  function changeDesc() {
+    const result = document.querySelector('.file-desc');
+    result.textContent = 'File captured!';
+    result.classList.remove('has-text-grey-light');
+    }
+
+  function loading() {
+    const result = document.querySelector('.loading');
+    result.classList.remove('is-hidden');
+    }
+</script>
 <form
   class=""
   action="{{ url_for('upload') }}"
   method="post"
   enctype="multipart/form-data"
 >
-  <div class="container is-fluid">
-    <div class="file is-boxed is-centered">
+  <div class="m-4 mt-5">
+    <div class="notification is-danger">
+      <button class="delete fas fa-exclamation-circle" disabled></button>
+
+      Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum
+      dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut,
+      porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam
+      gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
+    </div>
+
+    <div class="file has-name is-fullwidth mb-3">
       <label class="file-label">
         {% if 'image' in media_type %}
         <input
           type="file"
+          class="file-media"
           name="file"
           accept="img/*"
           capture="environment"
+          onchange="changeDesc()"
           hidden
         />
         <input type="hidden" name="media_type" value="image" />
         {% endif %} {% if 'video' in media_type %}
         <input
           type="file"
+          class="file-media"
           name="file"
           accept="video/*"
           capture="environment"
+          onchange="changeDesc()"
           hidden
         />
         <input type="hidden" name="media_type" value="video" />
         {% endif %}
         <span class="file-cta">
           <span class="file-icon">
-            <i class="fas fa-upload"></i>
+            <i class="fas fa-camera"></i>
           </span>
-          <span class="file-label"> Choose a file… </span>
+          <span class="file-label">Capture</span>
+        </span>
+        <span class="file-desc file-name has-text-grey-light"
+          >Click to capture {{media_type}}
         </span>
       </label>
     </div>
+
     <div class="field">
-      <label class="label">Location</label>
+      <label class="label">General Location</label>
       <div class="control">
         <input
           class="input"
           type="text"
           name="location"
-          placeholder="General location of the image taken"
+          placeholder="Location relative to the scene"
         />
       </div>
     </div>
@@ -53,8 +82,39 @@ content %}
       name="incident_id"
       value="{{incident_id}}"
     />
-    <div class="control">
-      <button class="button is-primary">Submit</button>
+
+    <!-- <div class="field is-grouped is-grouped-right">
+      <div class="control">
+        <button class="button is-primary">Upload</button>
+      </div>
+      <div class="control">
+        <button type="button" class="button is-link is-light">
+          <a href="{{url_for('hello')}}">Cancel</a>
+        </button>
+      </div>
+    </div> -->
+
+    <div class="columns is-mobile">
+      <div class="column is-half">
+        <p class="loading is-hidden">
+          Uploading {{media_type}} <i class="fas fa-spinner fa-pulse"></i>
+        </p>
+      </div>
+
+      <div class="column is-half">
+        <div class="field is-grouped is-grouped-right">
+          <div class="control">
+            <button class="button is-primary" onclick="loading()">
+              Upload
+            </button>
+          </div>
+          <div class="control">
+            <button type="button" class="button is-link is-light">
+              <a href="{{url_for('hello')}}">Cancel</a>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </form>

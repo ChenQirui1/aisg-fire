@@ -46,8 +46,7 @@ def get_media(filename):
 
 
 
-
-@app.route("/success")
+@app.route("/success",methods=['GET','POST'])
 def success():
     return render_template('success.html')
 
@@ -87,8 +86,10 @@ def upload():
             filename = secure_filename(file.filename)
             media_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             pred_path = os.path.abspath("static")
+            data = dict(request.form)
+            data["create_time"] = datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p")
             file.save(media_path)
-            utils.modify_yaml(media_path)
+            utils.modify_yaml(media_path,data["media_type"])
             #os.chdir(os.path.abspath("../peeking-duck"))
             #print("Path Changed to peeking-duck")
             
@@ -101,16 +102,13 @@ def upload():
             p = subprocess.Popen("peekingduck run", shell=True, cwd=peekingduck_path)
             p.wait()
             
-            
             #create document
-            data = dict(request.form)
-            data["create_time"] = datetime.now().strftime("%m/%d/%Y, %I:%M:%S %p")
             data["filename"] = filename
             data['pred_filename'] = utils.retrieve_pred_filename(filename,pred_path)
             #print(data)
             db.insert(data)
-            return render_template('success.html')
-
+            
+        return render_template('success.html')
 
 @app.route('/capture')
 def capture():

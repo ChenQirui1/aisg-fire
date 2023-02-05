@@ -1,28 +1,34 @@
 {% extends "base.html" %} {% block title %}Admin Page{% endblock %} {% block
 content %}
-<h1>Active Incidents</h1>
 
-{% for incident in incidents %}
-<div class="card">
-  <header class="card-header">
-    <p class="card-header-title">{{ incident.name }}</p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      {{ incident.description }}
-      <!-- <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> -->
-      <br />
-      <p>Location: {{incident.location}}</p>
+<section class="section">
+  <h1 class="title has-text-centered">Active Incidents</h1>
+</section>
 
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+<section class="section">
+  {% for incident in incidents %}
+  <div class="card mb-4">
+    <header class="card-header">
+      <p class="card-header-title">{{ incident.name }}</p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        {{ incident.description }}
+        <!-- <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a> -->
+        <br />
+        <p>Location: {{incident.location}}</p>
+
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </div>
     </div>
+    <footer class="card-footer">
+      <a
+        href="{{ url_for('view_post',incident_id=incident.id) }}"
+        class="card-footer-item"
+        >View Posts</a
+      >
+    </footer>
   </div>
-  <footer class="card-footer">
-    <a
-      href="{{ url_for('view_post',incident_id=incident.id) }}"
-      class="card-footer-item"
-      >View Posts</a
-    >
-  </footer>
-</div>
-{% endfor %} {% endblock %}
+  {% endfor %}
+</section>
+{% endblock %}
