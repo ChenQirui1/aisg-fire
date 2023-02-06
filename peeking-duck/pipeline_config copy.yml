@@ -1,9 +1,0 @@
-nodes:
-  - input.visual:
-      source: squid.jpg
-  - model.yolo:
-      detect: ["person", "cell phone", "fork"]
-  - draw.bbox:
-      show_labels: True
-  - output.media_writer:
-      output_dir: data

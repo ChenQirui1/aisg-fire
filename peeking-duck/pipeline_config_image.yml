@@ -1,0 +1,28 @@
+nodes:
+  - input.visual:
+      source:
+  - custom_nodes.augment.clahe
+  - custom_nodes.augment.nlmeans:
+      h: 3
+      hColor: 3
+  - model.yolo:
+      detect:
+        [
+          "person",
+          "cell phone",
+          "car",
+          "motorcycle",
+          "bus",
+          "truck",
+          "fire hydrant",
+          "tv",
+          "microwave",
+          "oven",
+          "toaster",
+          "refrigerator",
+          "hair drier",
+        ]
+  - draw.bbox:
+      show_labels: true
+  - custom_nodes.output.media_writer_h264:
+      output_dir: ../flask-server/static

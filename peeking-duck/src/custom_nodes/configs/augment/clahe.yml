@@ -1,0 +1,5 @@
+input: ["img"]
+output: ["img"]
+
+clipLimit: 2.0
+tileGridSize: [8, 8]

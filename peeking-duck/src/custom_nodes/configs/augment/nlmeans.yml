@@ -1,0 +1,7 @@
+input: ["img"]
+output: ["img"]
+
+templateWindowSize: 7
+searchWindowSize: 21
+h: 10
+hColor: 10
